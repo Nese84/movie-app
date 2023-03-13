@@ -1,37 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import avatar from "../assets/icons/avatar.png";
 
 const Navbar = () => {
+  const currentUser = { displayName: "felix franko" };
+  // const currentUser = false;
   return (
     <div>
       <nav
-        className="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-3 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start"
+        className="flex w-full flex-wrap items-center justify-between bg-neutral-100 dark:bg-neutral-900 py-3 dark:text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start fixed top-0 z-20"
         data-te-navbar-ref=""
       >
         <div className="flex w-full flex-wrap items-center justify-between px-6">
-          <a className="pr-2 text-xl font-semibold text-white" href="#">
-            Navbar
-          </a>
+          <Link className="pr-2 text-xl font-semibold text-white" to="/">
+            React Movie App
+          </Link>
 
           {/* Collapsible wrapper */}
           {/* Right elements */}
           <div className="relative flex items-center">
+            {currentUser && (
+              <h5 className="mr-2 capitalize">{currentUser.displayName}</h5>
+            )}
             <div className="relative" data-te-dropdown-ref="">
-              <a
+              <span
                 className="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-                href="#"
                 id="dropdownMenuButton2"
                 role="button"
                 data-te-dropdown-toggle-ref=""
                 aria-expanded="false"
               >
                 <img
-                  src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                  src={currentUser.photoURL || avatar}
                   className="rounded-full"
                   style={{ height: 25, width: 25 }}
                   alt=""
                   loading="lazy"
                 />
-              </a>
+              </span>
               <ul
                 className="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
                 aria-labelledby="dropdownMenuButton2"
@@ -70,6 +76,7 @@ const Navbar = () => {
           {/* Right elements */}
         </div>
       </nav>
+      <div className="h-[52px]"></div>
     </div>
   );
 };
